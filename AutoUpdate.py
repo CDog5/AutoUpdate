@@ -1,13 +1,14 @@
 import requests,zipfile,os,shutil
 dirpath = os.getcwd()
-#CLEAR CURRENT 'LATEST' FOLDER. 
-#Comment out if you want a failsafe
+#CLEAR CURRENT 'LATEST' FOLDER
 old = os.path.join(dirpath,'Latest')
 if os.path.exists(old):
     shutil.rmtree(old)
 #AUTOUPDATE REPO URL
+#REPLACE WITH YOUR OWN REPO URL
 url = 'https://github.com/CDog5/AutoUpdate/archive/refs/heads/main.zip'
-#GET JUST FILE NAME
+#GET JUST FILE NAME AND REPO NAME
+repo_name = url.split('/archive')[0].split('/')[-1]
 fname = url.split('/')[-1]
 r = requests.get(url)
 fpath = os.path.join(dirpath,fname)
@@ -21,7 +22,7 @@ with zipfile.ZipFile(fpath,'r') as myzip:
             myzip.extract(f,dirpath)
 #CLEANUP BY REMOVING ZIP AND RENAMING FOLDER
 os.remove(fpath)            
-os.rename(os.path.join(dirpath,'AutoUpdate-main'),os.path.join(dirpath,'Latest'))
+os.rename(os.path.join(dirpath,f'{repo_name}-{fname.replace(".zip","")}'),os.path.join(dirpath,'Latest'))
 #DISPLAY VERSION INFO THEN DELETE THAT FILE
 info = os.path.join(dirpath,'Latest','Version.txt')
 with open(info,'r') as f:
