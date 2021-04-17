@@ -1,6 +1,7 @@
 import requests,zipfile,os,shutil
 dirpath = os.getcwd()
-#CLEAR CURRENT 'LATEST' FOLDER. Comment out if you want a failsafe
+#CLEAR CURRENT 'LATEST' FOLDER. 
+#Comment out if you want a failsafe
 old = os.path.join(dirpath,'Latest')
 if os.path.exists(old):
     shutil.rmtree(old)
