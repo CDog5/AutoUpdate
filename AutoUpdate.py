@@ -18,7 +18,7 @@ with open(fpath,'wb') as f:
 #EXTRACT EVERYTHING EXCEPT MARKDOWN AND THIS FILE
 with zipfile.ZipFile(fpath,'r') as myzip:
     for f in myzip.namelist():
-        if f == 'Version.md' or not f.endswith('.md'):
+        if 'Version.md' in f or not f.endswith('.md'):
             myzip.extract(f,dirpath)
 #CLEANUP BY REMOVING ZIP AND RENAMING FOLDER
 os.remove(fpath)            
