@@ -18,9 +18,8 @@ with open(fpath,'wb') as f:
 #EXTRACT EVERYTHING EXCEPT MARKDOWN AND THIS FILE
 with zipfile.ZipFile(fpath,'r') as myzip:
     for f in myzip.namelist():
-        if f != 'AutoUpdate.py':
-            if f == 'Version.md' or not f.endswith('.md'):
-                myzip.extract(f,dirpath)
+        if f == 'Version.md' or not f.endswith('.md'):
+            myzip.extract(f,dirpath)
 #CLEANUP BY REMOVING ZIP AND RENAMING FOLDER
 os.remove(fpath)            
 os.rename(os.path.join(dirpath,f'{repo_name}-{fname.replace(".zip","")}'),os.path.join(dirpath,'Latest'))
