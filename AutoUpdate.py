@@ -1,4 +1,5 @@
-import requests,zipfile,os,shutil
+import zipfile,os,shutil
+from urllib import request
 dirpath = os.getcwd()
 #CLEAR CURRENT 'LATEST' FOLDER
 old = os.path.join(dirpath,'Latest')
@@ -10,11 +11,12 @@ url = 'https://github.com/CDog5/AutoUpdate/archive/refs/heads/main.zip'
 #GET JUST FILE NAME AND REPO NAME
 repo_name = url.split('/archive')[0].split('/')[-1]
 fname = url.split('/')[-1]
-r = requests.get(url)
+with request.urlopen(url) as rs:
+    r = rs.read()
 fpath = os.path.join(dirpath,fname)
 #ZIP FILE MUST BE READ AS BYTES
 with open(fpath,'wb') as f:
-    f.write(r.content)
+    f.write(rs)
 #EXTRACT EVERYTHING EXCEPT MARKDOWN AND THIS FILE
 with zipfile.ZipFile(fpath,'r') as myzip:
     for f in myzip.namelist():
