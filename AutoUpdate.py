@@ -16,7 +16,7 @@ with request.urlopen(url) as rs:
 fpath = os.path.join(dirpath,fname)
 #ZIP FILE MUST BE READ AS BYTES
 with open(fpath,'wb') as f:
-    f.write(rs)
+    f.write(r)
 #EXTRACT EVERYTHING EXCEPT MARKDOWN AND THIS FILE
 with zipfile.ZipFile(fpath,'r') as myzip:
     for f in myzip.namelist():
