@@ -1,7 +1,8 @@
 import random
+from string import hexdigits
 #inefficient but works
 while True:
-    usable="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890?!_*#"
+    usable = hexdigits + "?!_*#"
     amount = int(input("How long is your password going to be?: "))
     print("1 - Slow, print as you go.")
     print("2 - Fast, print when done.")
